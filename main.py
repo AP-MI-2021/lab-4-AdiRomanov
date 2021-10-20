@@ -152,20 +152,50 @@ def get_all_superprime(lst: list[int]) -> list[int]:
 
     return result
 
-def cmmdc(m, n):
+def get_cmmdc(lst):
     """
-    Cauta cel mai mic divizor comun dintre numerele pozitive
-    :return: CMMDC
+    gaseste cel mai mic div comun dintre nr pozitive
+    :param lst: lista
+    :return: cmmdc
     """
-    while m != n:
-        if m > n:
-            m = m - n
+    maxi = -1
+    for n in lst:
+        if n > maxi:
+            maxi = n
+    while maxi != 0:
+        gasit = 1;
+        for i in lst:
+            if i > -1 and i % maxi != 0:
+                gasit = 0
+        if gasit == 1:
+            return maxi
+        maxi -= 1
+
+def invers(nr):
+    """
+    determina inversul nr
+    :param nr: numarul dorit
+    :return: inversul
+    """
+
+    n = nr
+    n *= -1
+    num = 0
+    while n != 0:
+        num = num * 10 + (n % 10)
+        n = n // 10
+
+    return -1*num
+
+def modifica(rez,cmmdc):
+
+    for i in rez:
+        if i >= 0:
+            i = cmmdc
         else:
-            n = n - m
+            i = invers(i)
 
-    return m
-
-
+    return rez
 
 def main():
     lst = []
@@ -185,6 +215,12 @@ def main():
         elif option == '4':
             res = get_all_superprime(lst)
             print("Numerele superprime din lista sunt: ", res)
+        elif option == '5':
+            cmmdc = get_cmmdc(lst)
+            res = modifica(lst, cmmdc)
+            print("Afișarea listei obținute din lista inițială în care numerele pozitive și nenule au fost înlocuite cu "
+                  "CMMDC-ul lor și numerele negative au cifrele în ordine inversă este: ", res)
+
         elif option == 'x':
             break
         else:
