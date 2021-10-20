@@ -163,7 +163,7 @@ def get_cmmdc(lst):
         if n > maxi:
             maxi = n
     while maxi != 0:
-        gasit = 1;
+        gasit = 1
         for i in lst:
             if i > -1 and i % maxi != 0:
                 gasit = 0
@@ -187,13 +187,20 @@ def invers(nr):
 
     return -1*num
 
-def modifica(rez,cmmdc):
+def modifica(rez, cmmdc):
+    """
 
-    for i in rez:
-        if i >= 0:
-            i = cmmdc
+    :param rez:
+    :param cmmdc:
+    :return:
+    """
+    n = len(rez)
+    print(cmmdc)
+    for i in range (0,n):
+        if rez[i] >= 0:
+            rez[i] = cmmdc
         else:
-            i = invers(i)
+            rez[i] = invers(rez[i])
 
     return rez
 
@@ -234,5 +241,4 @@ if __name__ == '__main__':
     test_get_lowest()
     test_is_superprime()
     test_isprime()
-
     main()
